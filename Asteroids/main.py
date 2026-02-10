@@ -1,5 +1,11 @@
+import pygame
+
+from constants.py import *
+
 def main():
-    print("Hello from asteroids!")
+    print("Starting Asteroids with pygame version: 2.6.1")
+    print(f"Screen width: {SCREEN_WIDTH}")
+    print(f"Screen height: {SCREEN_HEIGHT}")
 
 
 if __name__ == "__main__":
