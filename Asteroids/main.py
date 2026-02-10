@@ -1,6 +1,6 @@
 import pygame
 
-from constants.py import *
+from constants import *
 
 def main():
     print("Starting Asteroids with pygame version: 2.6.1")
