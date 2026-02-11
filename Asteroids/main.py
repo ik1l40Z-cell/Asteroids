@@ -38,6 +38,12 @@ def main():
             drawn.draw(screen)
         updatable.update(dt)
         for asteroid in asteroids:
+            for shot in shots:
+                if CircleShape.collides_with(shot, asteroid):
+                    log_event("asteroid_shot")
+                    asteroid.split()
+                    shot.kill()
+        for asteroid in asteroids:
             if CircleShape.collides_with(player, asteroid):
                 log_event("player_hit")
                 print("Game over!")
