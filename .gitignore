@@ -1,3 +1,7 @@
+Asteroids/.venv/
+Asteroids/__pycache__/
+*.pyc
+Asteroids/.DS_Store
 game_state.jsonl
 game_events.jsonl
 Asteroids/game_state.jsonl
