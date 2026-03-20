@@ -6,4 +6,5 @@ game_state.jsonl
 game_events.jsonl
 Asteroids/game_state.jsonl
 Asteroids/game_events.jsonl
+Asteroids/*.jsonl
 *.jsonl
