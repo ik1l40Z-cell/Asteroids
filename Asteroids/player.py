@@ -1,4 +1,6 @@
+import math
 import pygame
+import variables
 from constants import *
 from circleshape import CircleShape
 from shot import Shot
@@ -20,7 +22,12 @@ class Player(CircleShape):
 		return [a, b, c]
 
 	def draw(self, screen):
-		pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH)
+		if variables.timer <= 0:
+			pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH)
+		else:
+			pulse = math.sin(variables.timer * 15)
+			fade_value = int(255 * (pulse + 1) / 2)
+			pygame.draw.polygon(screen, (fade_value, fade_value, fade_value), self.triangle(), LINE_WIDTH)
 
 	def rotate(self, dt):
 		self.rotation += PLAYER_TURN_SPEED * dt
@@ -36,9 +43,13 @@ class Player(CircleShape):
 		direction = pygame.Vector2(0, 1).rotate(self.rotation)
 		shot.velocity = direction * PLAYER_SHOOT_SPEED
 
+	def invincible(self, screen):
+		variables.timer = variables.iFrameTime
+
 	def update(self, dt):
 		keys = pygame.key.get_pressed()
 		self.cooldown -= dt
+		variables.timer -= dt
 		if keys[pygame.K_a]:
 			self.rotate(-dt)
 		if keys[pygame.K_d]:

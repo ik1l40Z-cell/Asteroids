@@ -1,6 +1,7 @@
+from constants import *
 import pygame
 import random
-import constants
+import variables
 from logger import log_event
 from circleshape import CircleShape
 
@@ -9,23 +10,24 @@ class Asteroid(CircleShape):
 		super().__init__(x, y, radius)
 
 	def draw(self, screen):
-		pygame.draw.circle(screen, "white", self.position, self.radius, constants.LINE_WIDTH)
+		pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)
 
 	def update(self, dt):
-		self.position += self.velocity * dt
+		self.position += (self.velocity * dt)
 
 	def split(self):
 		self.kill()
-		if self.radius <= constants.ASTEROID_MIN_RADIUS:
-			constants.SCORE += 125
+		if self.radius <= ASTEROID_MIN_RADIUS:
+			variables.score += 125
 			return
 		log_event("asteroid_split")
-		constants.SCORE += 42
+		variables.score += 42
 		num = random.uniform(20, 50)
 		new_vec1 = self.velocity.rotate(num)
 		new_vec2 = self.velocity.rotate(-num)
-		new_rad = self.radius - constants.ASTEROID_MIN_RADIUS
+		new_rad = self.radius - ASTEROID_MIN_RADIUS
 		smol_ast1 = Asteroid(self.position.x, self.position.y, new_rad)
 		smol_ast2 = Asteroid(self.position.x, self.position.y, new_rad)
 		smol_ast1.velocity = new_vec1
 		smol_ast2.velocity = new_vec2
+
